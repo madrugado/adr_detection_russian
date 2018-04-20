@@ -47,14 +47,15 @@ def load_data(filename):
         sentences.append(sentences_dict[key])
     labels = []
     for s in sentences:
-        #For binary classification
+        # For binary classification
         # if s['label'] == 2 or s['label'] == 0 or s['label'] == 1:
         #     labels.append(1)
         # else:
         #     labels.append(0)
-        #For multi-class classification
+        # For multi-class classification
         labels.append(s['label'])
     return sentences, labels
+
 
 def extract_lemmas(X):
     lemmatized_text = []
@@ -65,6 +66,7 @@ def extract_lemmas(X):
             result += l + " "
         lemmatized_text.append(result.strip())
     return lemmatized_text
+
 
 def extract_pos_lemmas(X):
     lemmas_dict = {}
@@ -80,6 +82,7 @@ def extract_pos_lemmas(X):
             lemmas_result.append(l["text"])
         lemma_pos.append(lemmas_result)
     return lemma_pos
+
 
 def load_pos_tags(filename):
     pos_tags = {}
@@ -101,6 +104,7 @@ def load_fasttext_model(filename):
             model[line_parts[0]] = vector
     return model
 
+
 def load_polarity_dict(filename):
     polarity_dict = {}
     with codecs.open(filename, "r", encoding='utf-8') as f:
@@ -114,7 +118,7 @@ def load_polarity_dict(filename):
 
 
 def create_features(vectorizer, X, is_train):
-    lemmas =  extract_lemmas(X)
+    lemmas = extract_lemmas(X)
     if is_train:
         features = vectorizer.fit_transform(lemmas).toarray()
     else:
