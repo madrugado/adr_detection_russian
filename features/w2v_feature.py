@@ -3,7 +3,8 @@ import re
 
 import numpy as np
 
-def makeFeatureVec(words, model, num_features):
+
+def make_feature_vec(words, model, num_features):
     # Function to average all of the word vectors in a given
     # paragraph
     #
@@ -30,7 +31,7 @@ def makeFeatureVec(words, model, num_features):
     return featureVec
 
 
-def getAvgFeatureVecs(reviews, model, num_features):
+def get_avg_feature_vecs(reviews, model, num_features):
     # Given a set of reviews (each one a list of words), calculate
     # the average feature vector for each one and return a 2D numpy array
     #
@@ -61,8 +62,8 @@ def getAvgFeatureVecs(reviews, model, num_features):
                 print "Review %d of %d" % (counter, len(reviews))
             #
             # Call the function (defined above) that makes average feature vectors
-            vec1 = makeFeatureVec(word, model,
-                                       num_features)
+            vec1 = make_feature_vec(word, model,
+                                    num_features)
             reviewFeatureVecs[counter] = vec1
 
         vec1 = [str(l) for l in vec1.tolist()]
@@ -79,7 +80,7 @@ def getAvgFeatureVecs(reviews, model, num_features):
 def create_w2v_feature(lemmas, model):
     features = []
     for l in lemmas:
-        feature = makeFeatureVec(l, model, model.vector_size)
+        feature = make_feature_vec(l, model, model.vector_size)
         feature_clear = []
         for x in feature:
             if np.math.isnan(x):
